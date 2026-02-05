@@ -1,0 +1,63 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  scrollbar-gutter: stable;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: Inter, system-ui, sans-serif;
+  color: #111827;
+}
+
+:root {
+  --status-gray-fg: #6b7280;
+  --status-gray-bg: #f3f4f6;
+  --status-orange-fg: #f97316;
+  --status-orange-bg: #fff7ed;
+  --status-green-fg: #16a34a;
+  --status-green-bg: #ecfdf5;
+  --status-red-fg: #dc2626;
+  --status-red-bg: #fef2f2;
+}
+
+.status {
+  display: inline-block;
+  color: var(--status-fg, #6b7280);
+}
+
+.status.status-gray {
+  --status-fg: var(--status-gray-fg);
+  --status-bg: var(--status-gray-bg);
+}
+
+.status.status-orange {
+  --status-fg: var(--status-orange-fg);
+  --status-bg: var(--status-orange-bg);
+}
+
+.status.status-green {
+  --status-fg: var(--status-green-fg);
+  --status-bg: var(--status-green-bg);
+}
+
+.status.status-red {
+  --status-fg: var(--status-red-fg);
+  --status-bg: var(--status-red-bg);
+}
+
+.status.status-pill {
+  padding: 0;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
