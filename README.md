@@ -16,7 +16,7 @@ Sistem ini menggunakan pendekatan:
 
 ## Tech Stack
 
-- **Backend**  : Laravel 11 (REST API)
+- **Backend**  : Laravel 12 (REST API)
 - **Auth**     : JWT (JSON Web Token)
 - **Frontend** : Nuxt.js
 - **Database** : PostgreSQL
@@ -71,7 +71,6 @@ dan dipertanggungjawabkan.
 │ ├── nuxt.config.ts
 │ └── README.md
 │
-├── docs/ # Dokumentasi pendukung (ERD, flow, dsb.)
 └── README.md # Dokumentasi utama
 
 ---

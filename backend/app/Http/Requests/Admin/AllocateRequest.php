@@ -8,7 +8,7 @@ class AllocateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // auth + role sudah di middleware
+        return true; 
     }
 
     public function rules(): array
