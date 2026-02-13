@@ -28,6 +28,7 @@ const props = withDefaults(
 .layout {
   display: flex;
   min-height: 100vh;
+  min-width: 1200px;
 }
 
 .content {

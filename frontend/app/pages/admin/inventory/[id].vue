@@ -8,6 +8,9 @@ import AdminHeader from "~/components/organisms/AdminHeader.vue";
 import StateBanner from "~/components/atoms/StateBanner.vue";
 import { useAdminInventoryDetail } from "~/composables/useAdminInventoryDetail";
 import AdminSummaryCard from "~/components/molecules/AdminSummaryCard.vue";
+import FormField from "~/components/molecules/FormField.vue";
+import BaseInput from "~/components/atoms/BaseInput.vue";
+import SmallActionButton from "~/components/atoms/SmallActionButton.vue";
 import { formatDateId } from "~/utils/date";
 
 const {
@@ -20,6 +23,10 @@ const {
   qty,
   note,
   loading,
+  showEditModal,
+  editLoading,
+  editError,
+  editForm,
   totalUsed,
   totalAvailable,
   totalAsset,
@@ -27,6 +34,9 @@ const {
   openModal,
   closeModal,
   submitStock,
+  openEditModal,
+  closeEditModal,
+  submitEdit,
 } = useAdminInventoryDetail();
 
 onMounted(loadDetail);
@@ -44,6 +54,7 @@ const registeredDate = computed(() => {
         </template>
         <template #actions>
           <div class="tools">
+            <button class="edit" @click="openEditModal">Edit Aset</button>
             <button class="add" @click="openModal">Tambahkan Produk</button>
           </div>
         </template>
@@ -117,6 +128,35 @@ const registeredDate = computed(() => {
         </button>
       </div>
     </div>
+
+    <div v-if="showEditModal" class="modal-overlay">
+      <div class="modal edit-modal">
+        <button class="modal-close" @click="closeEditModal" aria-label="Tutup">
+          x
+        </button>
+        <h3>Edit Aset</h3>
+        <StateBanner tone="error" :message="editError" />
+        <div class="edit-form">
+          <FormField label="Kode Aset" required>
+            <BaseInput v-model="editForm.asset_code" placeholder="Kode aset" />
+          </FormField>
+          <FormField label="Nama Aset" required>
+            <BaseInput v-model="editForm.asset_name" placeholder="Nama aset" />
+          </FormField>
+          <FormField label="Merk">
+            <BaseInput v-model="editForm.brand" placeholder="Merk" />
+          </FormField>
+        </div>
+        <div class="modal-actions">
+          <SmallActionButton class="btn-cancel" label="Batal" @click="closeEditModal" />
+          <SmallActionButton
+            class="btn-submit"
+            :label="editLoading ? 'Menyimpan...' : 'Simpan'"
+            @click="submitEdit"
+          />
+        </div>
+      </div>
+    </div>
   </AdminPageShell>
 </template>
 
@@ -132,6 +172,26 @@ const registeredDate = computed(() => {
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+.edit {
+  background: #0f2a44;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.edit:hover {
+  background: #0b2136;
+}
+
+.edit:active {
+  transform: scale(0.96);
 }
 
 .add {
@@ -221,6 +281,65 @@ const registeredDate = computed(() => {
   border-radius: 14px;
   text-align: center;
   position: relative;
+}
+
+.edit-modal {
+  width: 420px;
+  text-align: left;
+}
+
+.edit-modal h3 {
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.edit-form {
+  margin-top: 8px;
+}
+
+.modal-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancel {
+  background: #0f2a44;
+  color: white;
+}
+
+.btn-submit {
+  background: #ff8a2b;
+  color: white;
+}
+
+.btn-cancel {
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.btn-cancel:hover {
+  background: #0b2136;
+}
+
+.btn-cancel:active {
+  transform: scale(0.96);
+}
+
+.btn-submit {
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.btn-submit:hover {
+  background: #ea6f13;
+}
+
+.btn-submit:active {
+  transform: scale(0.96);
 }
 
 .modal-close {
