@@ -25,7 +25,7 @@ const { loading, error, form, submit, cancel } = useAdminInventoryCreate();
         <div class="card-header">
           <div class="left">
             <div>
-              <h2>Tambahkan Tinta Baru</h2>
+              <h2>Daftarkan Aset Baru</h2>
             </div>
           </div>
         </div>
